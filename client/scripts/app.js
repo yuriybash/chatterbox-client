@@ -2,11 +2,11 @@
 var messages = {};
 var sortableMessages = [];
 
-$.ajax({
+setInterval(function(){$.ajax({
   // always use this url
   url: 'https://api.parse.com/1/classes/chatterbox',
   type: 'GET',
-  data: '',//JSON.stringify(message),
+  data: {order: "-updatedAt"},//JSON.stringify(message),
   contentType: 'application/json',
   success: function (data) {
     for(var x =0; x < data.results.length; x++){
@@ -15,7 +15,7 @@ $.ajax({
 
 
     for(var prop in messages){
-
+      messages[prop].text = escape(messages[prop].text)
       sortableMessages.push({
                               "createdAt": messages[prop].createdAt,
                               "user":messages[prop].username,
@@ -29,8 +29,10 @@ $.ajax({
     })
 
   _.each(sortableMessages, function(a,key){
-    console.log("TEST")
-    $("#main").append('<div class="message" id='+key+'>'+a.text+'</div>');
+    $("#main").prepend('<div class="message" id='+key+'>'+a.text+'</div>');
+    if ( $('.message').length > 100 ) {
+      $('.messages').childen().last().remove();
+    }
 
   });
 
@@ -43,10 +45,21 @@ $.ajax({
     console.error('chatterbox: Failed to receive message');
   }
 });
+},500);
 
 
+function escape(string){
 
 
+  return string ? string.replace(/&/g, "&amp")
+                 .replace(/</g, "&lt")
+                 .replace(/>/g, "&gt")
+                 .replace(/"/g, "&quot")
+                 .replace(/'/g, "&#x27")
+                 .replace(/\//g, "&#x2F")
+              : undefined
+
+}
 
 
 
