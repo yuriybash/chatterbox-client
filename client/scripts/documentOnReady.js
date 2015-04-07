@@ -5,6 +5,8 @@ $(document).ready(function(){
     var $username;
     var $messageToSend;
 
+    $("#mymodal").modal('show');
+
 
       $(".sendmessagebutton").on('click', function(){
 

@@ -32,10 +32,20 @@ var ajax = {
     })
 
   _.each(sortableMessages, function(a,key){
-    $(".messages").prepend('<div class="message ' + (a.roomname || "") + '" id='+key+'>'+key + " " + a.text+" " + a.username+ " " + a.createdAt + "ROOMNAME: " + a.roomname +'</div>');
-    if ( $('.message').length > 100 ) {
+    $(".messages").prepend('<div class="modal-content">'+
+      '<div class="modal-header">'+
+          '<h4 class="modal-title">'+a.username+'</h4>'+
+        '</div>'+
+        '<div class="modal-body">'+
+          '<p>'+a.text+'</p>'+
+        '</div>'+
+        '<div class="modal-footer">'+
+          '<p>'+a.createdAt+'</p><p>'+a.roomname+'</p>'+
+          '<button type="button" class="btn btn-primary">Follow User</button>'+
+        '</div>'+
+      '</div><!-- /.modal-content -->');
+    //<div class="message ' + (a.roomname || "") + '" id='+key+'>'+key + " " + a.text+" " + a.username+ " " + a.createdAt + "ROOMNAME: " + a.roomname +'</div>');    if ( $('.message').length > 100 ) {
       $('.message').last().remove();
-    }
     if(window.filter && a.roomname !== window.filter){
       $('.message').first().toggle();
     }
@@ -52,7 +62,7 @@ var ajax = {
 $.ajax(ajax);
 setInterval(function(){
   $.ajax(ajax);
-},5000);
+},50000000);
 
 
 function escape(string){
