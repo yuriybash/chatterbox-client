@@ -52,11 +52,16 @@ $(document).ready(function(){
 
 
           $("a").on("click", function(){
-            console.log("INNER CLICK HANDLER WORKS")
-          var clickedLink = $(this).text();
-          $(".defaultbutton").text(clickedLink);
-          $(".message").not("."+clickedLink).toggle();      //use show and hide, right now we're never "un-hiding" previously toggled nodes
-          filter = $(this).val();
+            var clickedLink = $(this).text();
+            $(".defaultbutton").text(clickedLink);
+            if($(this).text()==="All Rooms"){
+              $(".message").show();
+              filter = undefined;
+            } else{
+              $("."+clickedLink).show();
+              $(".message").not("."+clickedLink).hide();      //use show and hide, right now we're never "un-hiding" previously toggled nodes
+              filter = $(this).text();
+            }
           })
 
 
