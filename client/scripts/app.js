@@ -1,17 +1,20 @@
 // YOUR CODE HERE:
 var messages = {};
-var sortableMessages = [];
+
 
 setInterval(function(){$.ajax({
   // always use this url
   url: 'https://api.parse.com/1/classes/chatterbox',
   type: 'GET',
-  data: {order: "-updatedAt"},//JSON.stringify(message),
+  data: {order: "-updatedAt"},
   contentType: 'application/json',
   success: function (data) {
+    console.log(data.results[0].objectId);
     for(var x =0; x < data.results.length; x++){
         messages[data.results[x].objectId] = data.results[x]
     }
+
+    var sortableMessages = [];
 
 
     for(var prop in messages){
@@ -29,15 +32,12 @@ setInterval(function(){$.ajax({
     })
 
   _.each(sortableMessages, function(a,key){
-    $("#main").prepend('<div class="message" id='+key+'>'+a.text+'</div>');
+    $(".messages").prepend('<div class="message" id='+key+'>'+key + " " + a.text+" " + a.username+ " " + a.createdAt+'</div>');
     if ( $('.message').length > 100 ) {
-      $('.messages').childen().last().remove();
+      $('.message').last().remove();
     }
 
   });
-
-
-
 
   },
   error: function (data) {
@@ -45,20 +45,17 @@ setInterval(function(){$.ajax({
     console.error('chatterbox: Failed to receive message');
   }
 });
-},500);
+},1500);
 
 
 function escape(string){
-
-
   return string ? string.replace(/&/g, "&amp")
                  .replace(/</g, "&lt")
                  .replace(/>/g, "&gt")
                  .replace(/"/g, "&quot")
                  .replace(/'/g, "&#x27")
                  .replace(/\//g, "&#x2F")
-              : undefined
-
+              : undefined;
 }
 
 
