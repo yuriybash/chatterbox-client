@@ -1,3 +1,5 @@
+var filter;
+
 $(document).ready(function(){
 
     var $username;
@@ -31,17 +33,30 @@ $(document).ready(function(){
 
 
       $(".addroombutton").on("click", function(){
-          $roomType = $(".addroom").val();
+          var $roomType = $(".addroom").val();
+
           var $buttonText = $(".defaultbutton").text();
-          $("ul").append("<li><a href=\"#\">"+$buttonText+"</a></li>");
+
+          if(!$("ul").children().is("."+$buttonText)){
+              $("ul").append("<li class="+$buttonText+"><a href=\"#\">"+$buttonText+"</a></li>");
+          }
+          if(!$("ul").children().is("."+$roomType)){
+              $("ul").append("<li class="+$roomType+"><a href=\"#\">"+$roomType+"</a></li>");
+          }
           $(".defaultbutton").text($roomType);
-          $(".message").not("."+$roomType).toggle();
+
+          $(".message").not("."+$roomType).hide();
+          filter = $roomType;
+
+
+
 
           $("a").on("click", function(){
+            console.log("INNER CLICK HANDLER WORKS")
           var clickedLink = $(this).text();
           $(".defaultbutton").text(clickedLink);
           $(".message").not("."+clickedLink).toggle();      //use show and hide, right now we're never "un-hiding" previously toggled nodes
-
+          filter = $(this).val();
           })
 
 
@@ -56,7 +71,9 @@ $(document).ready(function(){
 
 
       $(".defaultbutton").on("click", function(){
-          $(".message").not(".default").toggle();
+          if ($(this).val() === "All Rooms")
+            $(".message").show();
+          //filter = $(this).val();
       })
 
 

@@ -2,14 +2,14 @@
 var messages = {};
 
 
-setInterval(function(){$.ajax({
+var ajax = {
   // always use this url
   url: 'https://api.parse.com/1/classes/chatterbox',
   type: 'GET',
   data: {order: "-updatedAt"},
   contentType: 'application/json',
   success: function (data) {
-    console.log(data.results[0].objectId);
+    //console.log(data.results[0].objectId);
     for(var x =0; x < data.results.length; x++){
         messages[data.results[x].objectId] = data.results[x]
     }
@@ -36,6 +36,9 @@ setInterval(function(){$.ajax({
     if ( $('.message').length > 100 ) {
       $('.message').last().remove();
     }
+    if(window.filter && a.roomname !== window.filter){
+      $('.message').first().toggle();
+    }
 
   });
 
@@ -44,8 +47,12 @@ setInterval(function(){$.ajax({
     // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
     console.error('chatterbox: Failed to receive message');
   }
-});
-},10000);
+};
+
+$.ajax(ajax);
+setInterval(function(){
+  $.ajax(ajax);
+},5000);
 
 
 function escape(string){
