@@ -25,13 +25,45 @@ $(document).ready(function(){
             }
           });
 
+      })
 
 
+
+
+      $(".addroombutton").on("click", function(){
+          $roomType = $(".addroom").val();
+          var $buttonText = $(".defaultbutton").text();
+          $("ul").append("<li><a href=\"#\">"+$buttonText+"</a></li>");
+          $(".defaultbutton").text($roomType);
+          $(".message").not("."+$roomType).toggle();
+
+          $("a").on("click", function(){
+          var clickedLink = $(this).text();
+          $(".defaultbutton").text(clickedLink);
+          $(".message").not("."+clickedLink).toggle();      //use show and hide, right now we're never "un-hiding" previously toggled nodes
+
+          })
 
 
 
 
       })
+
+
+
+
+
+
+
+      $(".defaultbutton").on("click", function(){
+          $(".message").not(".default").toggle();
+      })
+
+
+
+
+
+
 
 
 

@@ -18,7 +18,7 @@ setInterval(function(){$.ajax({
 
 
     for(var prop in messages){
-      messages[prop].text = escape(messages[prop].text)
+          if(messages[prop].text)messages[prop].text = escape(messages[prop].text).substr(0,140);
       sortableMessages.push({
                               "createdAt": messages[prop].createdAt,
                               "user":messages[prop].username,
@@ -32,7 +32,7 @@ setInterval(function(){$.ajax({
     })
 
   _.each(sortableMessages, function(a,key){
-    $(".messages").prepend('<div class="message" id='+key+'>'+key + " " + a.text+" " + a.username+ " " + a.createdAt+'</div>');
+    $(".messages").prepend('<div class="message ' + (a.roomname || "") + '" id='+key+'>'+key + " " + a.text+" " + a.username+ " " + a.createdAt + "ROOMNAME: " + a.roomname +'</div>');
     if ( $('.message').length > 100 ) {
       $('.message').last().remove();
     }
@@ -45,7 +45,7 @@ setInterval(function(){$.ajax({
     console.error('chatterbox: Failed to receive message');
   }
 });
-},1500);
+},10000);
 
 
 function escape(string){

@@ -1,47 +1,70 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>chatterbox</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- dependencies -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
-    <script src="bower_components/underscore/underscore-min.js"></script>
-    <!-- your scripts -->
-    <script src="env/config.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/documentOnReady.js"></script>
-  </head>
-  <body>
-    <div id="main">
-      <h1>chatterbox</h1>
-      <!-- Your HTML goes here! -->
+<head>
+  <meta charset="utf-8">
+  <title>chatterbox</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- dependencies -->
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- your scripts -->
+  <script src="env/config.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/documentOnReady.js"></script>
+</head>
+<body>
+  <div id="main">
+    <h1>chatterbox</h1>
+
+    <!-- Split button -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger defaultbutton">Default</button>
+      <button type="button" class="btn btn-danger dropdown-toggle form-dropdown" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu form-dropdown" role="menu">
+      </ul>
     </div>
 
+
+
+    <!-- Your HTML goes here! -->
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon2">@</span>
+    <input type="text" class="form-control username" placeholder="Username" aria-describedby="sizing-addon2">
+    </div>
+
+    </div><!-- /.col-lg-6 -->
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" class="form-control sendmessage" placeholder="Message to send">
+        <span class="input-group-btn">
+          <button class="btn btn-default sendmessagebutton" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+
+  <div class="col-lg-6">
     <div class="input-group">
-  <span class="input-group-addon" id="sizing-addon2">@</span>
-  <input type="text" class="form-control username" placeholder="Username" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control addroom" placeholder="Find a room">
+      <span class="input-group-btn">
+        <button class="btn btn-default addroombutton" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+
+<div class="messages">
+
+
 </div>
-        <div class="row">
-      <div class="col-lg-6">
-
-      </div><!-- /.col-lg-6 -->
-      <div class="col-lg-6">
-        <div class="input-group">
-          <input type="text" class="form-control sendmessage" placeholder="Message to send">
-          <span class="input-group-btn">
-            <button class="btn btn-default sendmessagebutton" type="button">Go!</button>
-          </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
-
-
-
-    <div class="messages">
-
-
-    </div>
-  </body>
+</body>
 </html>
